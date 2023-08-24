@@ -8,16 +8,15 @@ const pool = new Pool({
 });
 
 const getStars = (request, response) => {
-  pool.query("SELECT * FROM stars", (error, results) => {
-    if (error) {
-      throw error;
-    }
-    response.status(200).json(results.rows);
-  });
+  executeQuery("SELECT * FROM stars");
 };
 
 const getPlanets = (request, response) => {
-  pool.query("SELECT * FROM planets", (error, results) => {
+  executeQuery("SELECT * FROM planets");
+};
+
+const executeQuery = (query) => {
+  pool.query(query, (error, results) => {
     if (error) {
       throw error;
     }
